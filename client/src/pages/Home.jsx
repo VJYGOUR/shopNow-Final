@@ -1,5 +1,11 @@
+import Header from "../components/home/Header";
+
 function Home() {
-  return <div className="uppercase text-8xl">Home page </div>;
+  return (
+    <>
+      <Header />
+    </>
+  );
 }
 
 export default Home;
