@@ -8,6 +8,8 @@ import Shop from "./pages/Shop";
 import Collection from "./pages/Collection";
 import Account from "./pages/Account";
 import ProtectedRoute from "./auth/ProtectedRoute";
+import AdminCategories from "./pages/admin/categories/AdminCategories";
+import CreateCategory from "./pages/admin/categories/CreateCategory";
 function App() {
   return (
     <Routes>
@@ -20,6 +22,8 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/" element={<Home />} />
+        <Route path="/admin/categories" element={<AdminCategories />} />
+        <Route path="/admin/create-category" element={<CreateCategory />} />
       </Route>
     </Routes>
   );

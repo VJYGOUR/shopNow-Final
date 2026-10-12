@@ -4,6 +4,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import connectDB from "./config/db.js";
 import authRoute from "./routes/auth.routes.js";
+import categoryRoute from "./routes/category.routes.js";
 //1) instance of express
 const app = express();
 //2) register middlewar
@@ -21,5 +22,6 @@ app.get("/test", (req, res) => {
   return res.json({ message: "hello from nowhere" });
 });
 app.use("/api/auth", authRoute);
+app.use("/api/category", categoryRoute);
 const PORT = 5000;
 app.listen(PORT, () => console.log("server is running on port 5000"));
