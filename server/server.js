@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import connectDB from "./config/db.js";
 import authRoute from "./routes/auth.routes.js";
 import categoryRoute from "./routes/category.routes.js";
+import productRoute from "./routes/product.routes.js";
 //1) instance of express
 const app = express();
 //2) register middlewar
@@ -23,5 +24,6 @@ app.get("/test", (req, res) => {
 });
 app.use("/api/auth", authRoute);
 app.use("/api/category", categoryRoute);
+app.use("/api/products", productRoute);
 const PORT = 5000;
 app.listen(PORT, () => console.log("server is running on port 5000"));
