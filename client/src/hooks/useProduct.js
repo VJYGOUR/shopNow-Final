@@ -1,9 +1,9 @@
 import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import * as service from "../services/productService";
-export const useProducts = (admin = false) => {
+export const useProducts = (admin = false, filters = {}) => {
   return useQuery({
-    queryKey: ["products", admin],
-    queryFn: () => service.getAllProduct(admin),
+    queryKey: ["products", admin, filters],
+    queryFn: () => service.getAllProduct(admin, filters),
   });
 };
 export const useProduct = (id) => {

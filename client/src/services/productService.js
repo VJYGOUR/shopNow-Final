@@ -1,6 +1,8 @@
 import api from "../api/axios";
-export const getAllProduct = async (admin = false) => {
-  const { data } = await api.get(admin ? "/products/admin" : "/products");
+export const getAllProduct = async (admin = false, filters = {}) => {
+  const { data } = await api.get(admin ? "/products/admin" : "/products", {
+    params: filters,
+  });
   return data;
 };
 export const getProductById = async (id) => {

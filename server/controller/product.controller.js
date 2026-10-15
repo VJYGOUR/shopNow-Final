@@ -2,8 +2,16 @@ import Category from "../models/category.model.js";
 import Product from "../models/product.model.js";
 
 export const getAllProduct = async (req, res) => {
+  const { search, category } = req.query;
+  const filter = { status: "active" };
   try {
-    const products = await Product.find({ status: "active" })
+    if (search) {
+      filter.name = { $regex: search, $options: "i" };
+    }
+    if (category) {
+      filter.category = category;
+    }
+    const products = await Product.find(filter)
       .populate("category", "name slug")
       .sort({ createdAt: -1 });
     if (products.length === 0) {

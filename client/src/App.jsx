@@ -4,7 +4,7 @@ import Dashboard from "./pages/Dashboard";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Shop from "./pages/Shop";
+
 import Collection from "./pages/Collection";
 import Account from "./pages/Account";
 import ProtectedRoute from "./auth/ProtectedRoute";
@@ -13,6 +13,8 @@ import CreateCategory from "./pages/admin/categories/CreateCategory";
 import AdminProductPage from "./pages/admin/categories/product/AdminProductPage";
 import AddProduct from "./pages/admin/categories/product/AddProduct";
 import AdminProtectedRoute from "./auth/AdminProtectedRoute";
+import Products from "./pages/Products";
+import ProductDetails from "./pages/ProductDetails";
 function App() {
   return (
     <Routes>
@@ -23,7 +25,8 @@ function App() {
         <Route path="/account" element={<Account />} />
         <Route path="/categories" element={<Collection />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/shop" element={<Shop />} />
+        <Route path="/shop" element={<Products />} />
+        <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/" element={<Home />} />
         <Route element={<AdminProtectedRoute />}>
           <Route path="/admin/categories" element={<AdminCategories />} />
