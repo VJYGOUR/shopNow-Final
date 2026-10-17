@@ -6,6 +6,7 @@ import connectDB from "./config/db.js";
 import authRoute from "./routes/auth.routes.js";
 import categoryRoute from "./routes/category.routes.js";
 import productRoute from "./routes/product.routes.js";
+import cartRoute from "./routes/cart.routes.js";
 //1) instance of express
 const app = express();
 //2) register middlewar
@@ -25,5 +26,6 @@ app.get("/test", (req, res) => {
 app.use("/api/auth", authRoute);
 app.use("/api/category", categoryRoute);
 app.use("/api/products", productRoute);
+app.use("/api/cart", cartRoute);
 const PORT = 5000;
 app.listen(PORT, () => console.log("server is running on port 5000"));

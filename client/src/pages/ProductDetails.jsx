@@ -1,9 +1,13 @@
 import { useParams } from "react-router-dom";
 import { useProduct } from "../hooks/useProduct";
 import { Link } from "react-router-dom";
+import { useCartMutation } from "../hooks/useCart";
+import { useState } from "react";
 const ProductDetails = () => {
   const { id } = useParams();
+  const addMutation = useCartMutation("addToCart");
   const { data, isPending, isError } = useProduct(id);
+  const [quantity, setQuantity] = useState(1);
   if (isPending) {
     return <p className="p-10 text-center text-gray-500">Loading product...</p>;
   }
@@ -63,32 +67,34 @@ const ProductDetails = () => {
                 <label htmlFor="quantity" className="text-sm font-medium">
                   Quantity
                 </label>
-                {/* <input
-                id="quantity"
-                type="number"
-                min="1"
-                max={product.stock}
-                value={quantity}
-                onChange={(e) =>
-                  setQuantity(
-                    Math.max(
-                      1,
-                      Math.min(product.stock, Number(e.target.value) || 1),
-                    ),
-                  )
-                }
-                className="w-20 rounded-lg border border-gray-300 px-3 py-2"
-              /> */}
+                <input
+                  id="quantity"
+                  type="number"
+                  min="1"
+                  max={product.stock}
+                  value={quantity}
+                  onChange={(e) =>
+                    setQuantity(
+                      Math.max(
+                        1,
+                        Math.min(product.stock, Number(e.target.value) || 1),
+                      ),
+                    )
+                  }
+                  className="w-20 rounded-lg border border-gray-300 px-3 py-2"
+                />
               </div>
             )}
 
-            {/* <button
-            disabled={product.stock < 1}
-            onClick={() => addToCart(product._id, quantity)}
-            className="mt-7 w-full rounded-xl bg-gray-950 px-6 py-4 font-semibold text-white transition hover:bg-gray-800 disabled:cursor-not-allowed disabled:bg-gray-300 sm:w-auto"
-          >
-            {product.stock > 0 ? "Add to cart" : "Out of stock"}
-          </button> */}
+            <button
+              disabled={product.stock < 1 || addMutation.isPending}
+              onClick={() =>
+                addMutation.mutate({ productId: product._id, quantity })
+              }
+              className="mt-7 w-full rounded-xl bg-gray-950 px-6 py-4 font-semibold text-white transition hover:bg-gray-800 disabled:cursor-not-allowed disabled:bg-gray-300 sm:w-auto"
+            >
+              {product.stock > 0 ? "Add to cart" : "Out of stock"}
+            </button>
 
             <div className="mt-6 border-t border-gray-200 pt-5 text-sm text-gray-500">
               Secure checkout · Quality products · Easy shopping

@@ -15,6 +15,7 @@ import AddProduct from "./pages/admin/categories/product/AddProduct";
 import AdminProtectedRoute from "./auth/AdminProtectedRoute";
 import Products from "./pages/Products";
 import ProductDetails from "./pages/ProductDetails";
+import Cart from "./pages/Cart";
 function App() {
   return (
     <Routes>
@@ -28,6 +29,7 @@ function App() {
         <Route path="/shop" element={<Products />} />
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/" element={<Home />} />
+        <Route path="/cart" element={<Cart />} />
         <Route element={<AdminProtectedRoute />}>
           <Route path="/admin/categories" element={<AdminCategories />} />
 
