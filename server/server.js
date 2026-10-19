@@ -31,11 +31,20 @@ app.use("/api/auth", authRoute);
 app.use("/api/category", categoryRoute);
 app.use("/api/products", productRoute);
 app.use("/api/cart", cartRoute);
+//Serve React production build
 const clientBuildPath = path.join(__dirname, "../client/dist");
 
 app.use(express.static(clientBuildPath));
-app.get(/^(?!\/api).*/, (req, res) => {
-  res.sendFile(path.join(clientBuildPath, "index.html"));
+
+// React SPA fallback (Express 5 compatible)
+app.get("/{*path}", (req, res, next) => {
+  if (req.path.startsWith("/api/")) {
+    return next();
+  }
+
+  res.sendFile(path.join(clientBuildPath, "index.html"), (err) => {
+    if (err) next(err);
+  });
 });
 const PORT = 5000;
 app.listen(PORT, () => console.log("server is running on port 5000"));
