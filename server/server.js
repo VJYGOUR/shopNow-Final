@@ -3,16 +3,20 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import connectDB from "./config/db.js";
+import path from "path";
+import { fileURLToPath } from "url";
 import authRoute from "./routes/auth.routes.js";
 import categoryRoute from "./routes/category.routes.js";
 import productRoute from "./routes/product.routes.js";
 import cartRoute from "./routes/cart.routes.js";
 //1) instance of express
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 //2) register middlewar
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: process.env.FRONTEND,
     credentials: true,
   }),
 );
@@ -27,5 +31,11 @@ app.use("/api/auth", authRoute);
 app.use("/api/category", categoryRoute);
 app.use("/api/products", productRoute);
 app.use("/api/cart", cartRoute);
+const clientBuildPath = path.join(__dirname, "../client/dist");
+
+app.use(express.static(clientBuildPath));
+app.get(/^(?!\/api).*/, (req, res) => {
+  res.sendFile(path.join(clientBuildPath, "index.html"));
+});
 const PORT = 5000;
 app.listen(PORT, () => console.log("server is running on port 5000"));
