@@ -20,15 +20,15 @@ function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
-
+      <Route path="/shop" element={<Products />} />
+      <Route path="/" element={<Home />} />
       <Route path="/register" element={<Register />} />
       <Route element={<ProtectedRoute />}>
         <Route path="/account" element={<Account />} />
         <Route path="/categories" element={<Collection />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/shop" element={<Products />} />
         <Route path="/products/:id" element={<ProductDetails />} />
-        <Route path="/" element={<Home />} />
+
         <Route path="/cart" element={<Cart />} />
         <Route element={<AdminProtectedRoute />}>
           <Route path="/admin/categories" element={<AdminCategories />} />
